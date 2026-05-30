@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kell anime(To-Do)</title>
+    <!-- Menghubungkan ke file CSS external -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="quest-container">
+        <!-- Tambahan Widget Jam Cyber -->
+        <div class="cyber-clock-wrapper">
+            <span class="clock-label">SYSTEM ONLINE</span>
+            <div id="cyberClock" class="cyber-clock">00:00:00</div>
+        </div>
+
+        <div class="manual-save-system" style="margin-top: 20px; padding-top: 15px; border-top: 1px dashed rgba(255, 255, 255, 0.1);">
+    <div style="display: flex; gap: 10px;">
+        <button id="manualSaveBtn" style="flex: 1; background: transparent; border: 1px solid #00ffcc; color: #00ffcc; font-family: 'Orbitron', sans-serif; padding: 8px; border-radius: 4px; cursor: pointer; font-size: 0.75rem; font-weight: bold; letter-spacing: 1px; transition: 0.3s;">
+            SAVE QUEST
+        </button>
+        <button id="manualLoadBtn" style="flex: 1; background: transparent; border: 1px solid #ff0055; color: #ff0055; font-family: 'Orbitron', sans-serif; padding: 8px; border-radius: 4px; cursor: pointer; font-size: 0.75rem; font-weight: bold; letter-spacing: 1px; transition: 0.3s;">
+            LOAD FILE
+        </button>
+    </div>
+    <div id="saveStatus" style="text-align: center; font-family: 'Orbitron', sans-serif; font-size: 0.65rem; color: #8a8aab; margin-top: 8px; min-height: 12px; letter-spacing: 1px;">
+        </div>
+</div>
+
+        <header>
+            <h1>EKELL DEV</h1>
+            <p>Selesaikan misimu untuk naik level!</p>
+        </header>
+
+        <div class="input-section">
+            <input type="text" id="questInput" placeholder="Tambah misi baru..." autocomplete="off">
+            <button id="addBtn">Accept</button>
+        </div>
+
+        <ul class="task-list" id="taskList">
+            <!-- Item To-Do akan muncul di sini secara dinamis -->
+        </ul>
+
+        <div class="player-rank-system" style="margin-top: 15px; width: 100%;">
+    <div style="display: flex; justify-content: space-between; font-family: 'Orbitron', sans-serif; font-size: 0.85rem; color: #00ffcc;">
+        <span>RANK: <span id="playerLevel">E-RANK</span></span>
+        <span>XP: <span id="xpText">0/100</span></span>
+    </div>
+    <div style="width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-top: 5px; overflow: hidden; border: 1px solid rgba(0,255,204,0.3);">
+        <div id="xpBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #00ffcc, #ff0055); transition: width 0.4s ease;"></div>
+    </div>
+</div>
+
+        <div class="stats">
+            <div>Active Quests: <span id="activeCount">0</span></div>
+            <div>Completed: <span id="completedCount">0</span></div>
+        </div>
+    </div>
+
+    <!-- Menghubungkan ke file Javascript external -->
+    <script src="script.js"></script>
+</body>
+</html>
