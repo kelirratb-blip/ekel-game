@@ -1,3 +1,9 @@
+
+// Variabel baru untuk sistem Streak
+const streakCount = document.getElementById('streakCount');
+let currentStreak = parseInt(localStorage.getItem('anime_streak')) || 0;
+let lastStreakDate = localStorage.getItem('anime_last_streak_date') || ""; // Format: YYYY-MM-DD
+
 // Variabel baru untuk fitur Manual Save
 const manualSaveBtn = document.getElementById('manualSaveBtn');
 const manualLoadBtn = document.getElementById('manualLoadBtn');
@@ -140,21 +146,31 @@ function addQuest() {
     updateUI();
 }
 
-// Fungsi mengubah status selesai/belum selesai
 function toggleQuest(index) {
+    // 1. Cek dulu status SEBELUM diubah
+    const wasCompleted = quests[index].completed;
+
+    // 2. Ubah statusnya
     quests[index].completed = !quests[index].completed;
-
-    // Tambahan logika suara dan hadiah XP jika misi diselesaikan
+    
+    // 3. Logika suara, XP, dan tambahan STREAK baru:
     if (quests[index].completed) {
+        // Jika misi selesai
         playCyberSound('clear');
-        updateRankSystem(25); // Dapat 25 XP tiap beresin 1 misi!
-    } else {
+        updateRankSystem(25); // Hadiah 25 XP
+        
+        // ---> INI DIA FITUR STREAK BARUNYA <---
+        checkAndUpdateStreak(true); 
+        
+    } else if (wasCompleted && !quests[index].completed) {
+        // Jika misi di-undo balik jadi belum selesai
         playCyberSound('accept');
-        updateRankSystem(-25); // Kurang XP kalau di-undo balik jadi belum selesai
+        updateRankSystem(-25); // Kurangi 25 XP
     }
-
+    
     updateUI();
 }
+
 
 playCyberSound('fail');
 updateRankSystem(-15); // Mengurangi 15 XP kalau misinya digagalkan/dihapus
@@ -237,3 +253,8 @@ manualLoadBtn.addEventListener('click', () => {
         showSaveStatus('>> NO SAVE DATA FOUND! <<', false);
     }
 });
+
+// PASTIKAN 3 BARIS INI ADA DI PALING BAWAH FILE SCRIPT.JS LU:
+updateUI();
+updateRankSystem(0);
+checkAndUpdateStreak(false); // <--- Baris ini wajib ada di paling bawah
